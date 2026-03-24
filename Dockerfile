@@ -16,8 +16,8 @@ COPY services/dark-core-resolver-api/app/ ./app/
 RUN useradd -m appuser \
     && chown -R appuser:appuser /app
 
-EXPOSE 8003
+EXPOSE 8002
 
 USER appuser
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8003"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8002"]

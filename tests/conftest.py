@@ -11,7 +11,7 @@ from fastapi.testclient import TestClient
 
 
 _COMPONENTS_ROOT = Path(__file__).resolve().parents[3]
-_CORE_LIB_ROOT = _COMPONENTS_ROOT / "core" / "dark-core-lib"
+_CORE_LIB_ROOT = _COMPONENTS_ROOT / "libraries" / "dark-core-lib"
 if str(_CORE_LIB_ROOT) not in sys.path:
     sys.path.insert(0, str(_CORE_LIB_ROOT))
 
@@ -61,7 +61,11 @@ def level1_payload():
         "rights": "CC-BY",
         "alternate_identifiers": [{"schema": "doi", "value": "10.1234/demo"}],
         "alternate_urls": ["https://example.org/alt/1"],
-        "original_metadata": {"schema": "dublin_core", "cid": "internal-level2-cid"},
+        "original_metadata": {
+            "schema": "oai_dc",
+            "media_type": "application/xml",
+            "cid": "internal-level2-cid",
+        },
     }
 
 
@@ -78,7 +82,7 @@ def mock_storage(level1_payload):
         ),
         "internal-level2-cid": StoredDocument(
             content=b"<record><title>Test Resource</title></record>",
-            content_type="application/xml",
+            content_type="application/octet-stream",
         ),
     }
 

@@ -20,7 +20,7 @@ def test_get_ark_info_returns_l1_without_cids(client):
     data = response.json()
     assert data["ark"] == "ark:/12345/test001"
     assert data["title"] == "Test Resource"
-    assert data["metadata_schema"] == "dublin_core"
+    assert data["metadata_schema"] == "oai_dc"
     payload = response.text
     assert "internal-level1-cid" not in payload
     assert "internal-level2-cid" not in payload
@@ -39,13 +39,13 @@ def test_get_ark_metadata_can_return_json(client, mock_storage):
         StoredDocument(
             content=(
                 b'{"$schema":"x","schema_version":"1.0","title":"A","authors":["B"],'
-                b'"year":2024,"original_metadata":{"schema":"datacite","cid":"internal-level2-json"}}'
+                b'"year":2024,"original_metadata":{"schema":"datacite","media_type":"application/json","cid":"internal-level2-json"}}'
             ),
-            content_type="application/json",
+            content_type="application/octet-stream",
         ),
         StoredDocument(
             content=b'{"identifier":"10.1234/demo"}',
-            content_type="application/json",
+            content_type="application/octet-stream",
         ),
     ]
 

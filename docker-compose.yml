@@ -6,16 +6,13 @@ services:
   resolver-api:
     build: *resolver-api-build
     ports:
-      - "8002:8003"
-    volumes:
-      - metadata-storage:/app/metadata_storage:ro
+      - "8002:8002"
     env_file:
       - .env.integration
     environment:
       - DARK_RPC_URL=http://rpc01:8545
-      - METADATA_STORAGE_PATH=/app/metadata_storage
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8003/health')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8002/health')"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -23,11 +20,6 @@ services:
     restart: unless-stopped
     networks:
       - dark-net
-
-volumes:
-  metadata-storage:
-    external: true
-    name: dark-core-minter-api_metadata-storage
 
 networks:
   dark-net:

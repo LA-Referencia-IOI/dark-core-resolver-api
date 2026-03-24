@@ -26,12 +26,12 @@ class Settings(BaseSettings):
     )
 
     resolver_api_host: str = Field(default="0.0.0.0", alias="RESOLVER_API_HOST")
-    resolver_api_port: int = Field(default=8003, alias="RESOLVER_API_PORT")
+    resolver_api_port: int = Field(default=8002, alias="RESOLVER_API_PORT")
     resolver_redirect_status: int = Field(default=302, alias="RESOLVER_REDIRECT_STATUS")
 
-    metadata_storage_type: str = Field(default="filesystem", alias="METADATA_STORAGE_TYPE")
+    metadata_storage_type: str = Field(default="store_api", alias="METADATA_STORAGE_TYPE")
     metadata_storage_path: str = Field(default="./metadata_storage", alias="METADATA_STORAGE_PATH")
-    metadata_store_api_url: str = Field(default="http://localhost:8002", alias="METADATA_STORE_API_URL")
+    metadata_store_api_url: str = Field(default="http://localhost:8003", alias="METADATA_STORE_API_URL")
     metadata_store_api_timeout_seconds: float = Field(
         default=10.0,
         alias="METADATA_STORE_API_TIMEOUT_SECONDS",
