@@ -66,6 +66,7 @@ def init_metadata_storage() -> MetadataStorage:
         _metadata_storage = build_metadata_storage(
             storage_type="filesystem",
             storage_path=settings.metadata_storage_path,
+            read_only=True,
         )
     elif storage_type == "store_api":
         _metadata_storage = build_metadata_storage(

@@ -6,12 +6,12 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-COPY components/services/dark-core-resolver-api/requirements.txt /tmp/requirements.txt
-COPY components/core/dark-core-lib /tmp/dark-core-lib
+COPY services/dark-core-resolver-api/requirements.txt /tmp/requirements.txt
+COPY libraries/dark-core-lib /tmp/dark-core-lib
 RUN pip install --no-cache-dir -r /tmp/requirements.txt \
     && pip install --no-cache-dir /tmp/dark-core-lib
 
-COPY components/services/dark-core-resolver-api/app/ ./app/
+COPY services/dark-core-resolver-api/app/ ./app/
 
 RUN useradd -m appuser \
     && chown -R appuser:appuser /app
