@@ -84,4 +84,6 @@ def init_metadata_storage() -> MetadataStorage:
 def shutdown_metadata_storage() -> None:
     """Release the shared metadata storage backend."""
     global _metadata_storage
+    if _metadata_storage is not None:
+        _metadata_storage.close()
     _metadata_storage = None
