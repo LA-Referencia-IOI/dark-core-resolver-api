@@ -18,7 +18,7 @@ def test_get_ark_info_returns_l1_without_cids(client):
 
     assert response.status_code == 200
     data = response.json()
-    assert data["ark"] == "ark:/12345/test001"
+    assert data["ark"] == "ark:12345/test001"
     assert data["title"] == "Test Resource"
     assert data["metadata_schema"] == "oai_dc"
     payload = response.text
@@ -76,3 +76,14 @@ def test_get_ark_info_returns_502_when_published_l1_missing(client, mock_storage
     response = client.get("/api/v1/arks/ark:/12345/test001?info")
 
     assert response.status_code == 502
+
+
+def test_compact_input_returns_compact_info(client):
+    response = client.get("/api/v1/arks/ark:12345/test001?info")
+    assert response.status_code == 200
+    assert response.json()["ark"] == "ark:12345/test001"
+
+
+def test_repeated_prefix_slashes_are_rejected(client):
+    response = client.get("/api/v1/arks/ark://12345/test001?info")
+    assert response.status_code == 400
