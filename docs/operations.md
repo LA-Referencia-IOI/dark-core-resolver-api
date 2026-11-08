@@ -3,14 +3,21 @@
 ## Run locally
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate
+python3.14 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 pip install -e ../dark-core-lib          # SDK from the sibling checkout
 export DARK_RPC_URL=http://localhost:8545
+export DARK_CHAIN_ID=2025             # match your node; the application default is 1337
 export DARK_CONTRACT_ADDRESS=0xYOUR_CONTRACT_ADDRESS
 export METADATA_STORE_API_URL=http://localhost:8003
 uvicorn app.main:app --host 0.0.0.0 --port 8002
 ```
+
+The RPC/Store localhost URLs above require explicitly published services. For
+the managed local inventory, follow the
+[Docker-network development example](https://github.com/LA-Referencia-IOI/dark-deployer/blob/main/docs/developer-onboarding.md#6-iterate-without-rebuilding-an-image).
+It also shows how to read the public contract address without exporting secrets.
+Run this component in its own environment and from its own directory.
 
 Then `curl -i http://localhost:8002/api/v1/arks/ark:NAAN/name` and add `?info` or
 `?metadata` for the other views.

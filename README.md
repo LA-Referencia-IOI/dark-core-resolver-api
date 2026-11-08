@@ -1,5 +1,8 @@
 # dark-core-resolver-api
 
+New platform developer: follow [developer onboarding](https://github.com/LA-Referencia-IOI/dark-deployer/blob/main/docs/developer-onboarding.md)
+for the complete local stack, signed requests and component iteration.
+
 Read-only ARK resolution service backed by blockchain and shared metadata storage.
 
 ## Overview
