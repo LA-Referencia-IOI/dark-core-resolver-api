@@ -23,7 +23,8 @@ The service does not keep:
 - `GET /api/v1/arks/{ark}?info` returns a public Level-1 projection
 - `GET /api/v1/arks/{ark}?metadata` returns Level-2 raw metadata with the media type declared in `L1.original_metadata.media_type`
 
-Public responses intentionally hide internal CIDs. They are used only inside the resolution pipeline.
+The `?info` projection omits internal metadata CIDs. The `?metadata` view
+returns the original document unchanged, including any identifiers it contains.
 
 ## Resolution Model
 
@@ -58,3 +59,16 @@ That keeps the minter and resolver aligned on:
 - inside the installed Docker stack, the resolver points to `http://store-api:8003`
 - with `METADATA_STORAGE_TYPE=filesystem`, the resolver must mount the same metadata directory as the minter in read-only mode
 - if storage is unavailable, default redirect can still work as long as blockchain resolution is healthy
+
+## Documentation
+
+- [Architecture](docs/architecture.md): modules, resolution flow, failure model.
+- [Configuration](docs/configuration.md): environment variables, ports, image.
+- [API reference](docs/api-reference.md): resolution views, errors, health.
+- [Operations](docs/operations.md): run, test, deploy, troubleshoot.
+- Platform context: [dARK documentation](https://github.com/LA-Referencia-IOI/dark-deployer/blob/main/docs/README.md)
+  and [architecture](https://github.com/LA-Referencia-IOI/dark-deployer/blob/main/docs/architecture.md)
+  in the dark-deployer repository.
+
+Note: the public resolver route is mounted at `/api/v1/arks/{ark}`; edge proxies
+usually publish it at `/` (`/ark:NAAN/name`).
